@@ -2,6 +2,43 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var currentFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var desc = Object.getOwnPropertyDescriptor(window, 'fetch') || Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+          if (!desc || desc.configurable !== false) {
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                return currentFetch;
+              },
+              set: function (fn) {
+                currentFetch = fn;
+              }
+            });
+          }
+        } catch (e) {}
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            var msg = (event && event.message) || '';
+            var file = (event && event.filename) || '';
+            if (
+              msg.indexOf('Cannot set property fetch') !== -1 ||
+              file.indexOf('chrome-extension://') === 0
+            ) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+              return false;
+            }
+          },
+          true
+        );
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zainab Zouhair | International Management & Digital Innovation</title>
     <meta name="description" content="Academic and professional portfolio of Zainab Zouhair, Master's student in International Management and Trade at Ibn Zohr University, Morocco. Focus on operations, logistics, and digital innovation." />
