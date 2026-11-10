@@ -45,6 +45,7 @@ export const PORTFOLIO_DATA = {
       fr: 'Opérations d’entreprise · Logistique & Supply Chain · Innovation Numérique',
     },
     location: 'Taroudant & Agadir, Morocco',
+    university: 'Ibn Zohr University (FP-Taroudant)',
     email: 'zouhairzineb78@gmail.com',
     phone: '+212 638 247 768',
     linkedin: 'https://www.linkedin.com/in/zainab-zouhair-687592387',
